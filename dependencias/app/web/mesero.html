@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#0891b2">
+  <title>Caja Futurista · Pedidos del mesero</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css">
+</head>
+<body class="cuerpo-movil" data-theme="futurista">
+
+  <header class="cab-movil">
+    <div class="logo-menor" id="logo-menor">CAJA<b>FUTURISTA</b></div>
+    <button type="button" class="boton boton-sonido" id="btn-sonido" title="Activar o silenciar la alerta">
+      <span id="icono-sonido">🔔</span>
+    </button>
+    <div class="estado-conexion" title="Conexión con la caja">
+      <i class="led ambar" id="led-conexion"></i>
+      <span id="texto-conexion">CONECTANDO</span>
+    </div>
+  </header>
+
+  <div class="barra-mesero">
+    <span>MESERO:</span>
+    <b id="nombre-mesero">—</b>
+    <button type="button" class="boton" id="btn-cambiar-mesero">CAMBIAR</button>
+  </div>
+
+  <main id="pantalla-pendientes">
+
+    <section class="bloque">
+      <div class="ventana">
+        <div class="barra-titulo">
+          <span class="icono-titulo">▩</span>
+          <span class="titulo-ventana">
+            PEDIDOS POR ACEPTAR
+            <span class="insignia" id="contador-pendientes">0</span>
+          </span>
+          <span class="botones-titulo" aria-hidden="true"><span class="boton-titulo">×</span></span>
+        </div>
+        <div class="contenido-ventana">
+          <p class="confirmar-mensaje" id="aviso-cliente">
+            Cuando un cliente pide desde el QR de su mesa, el pedido aparece aquí.
+            El primero que lo acepte lo manda a cocina e imprime la comanda.
+          </p>
+          <div class="lista-pendientes" id="lista-pendientes"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloque">
+      <div class="ventana">
+        <div class="barra-titulo">
+          <span class="icono-titulo">i</span>
+          <span class="titulo-ventana">CÓMO FUNCIONA</span>
+          <span class="botones-titulo" aria-hidden="true"><span class="boton-titulo">×</span></span>
+        </div>
+        <div class="contenido-ventana">
+          <ol class="lista-ayuda">
+            <li>El cliente escanea el <b>código QR de la mesa</b> y elige de la carta.</li>
+            <li>Su pedido llega aquí con la mesa y el detalle.</li>
+            <li>Pulsa <b>ACEPTAR</b> para enviarlo a cocina: se imprime la comanda sola.</li>
+            <li>Si no se puede preparar, pulsa <b>RECHAZAR</b> y escribe el motivo.</li>
+            <li>El cliente ve el estado en su celular en todo momento.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================
+       PANTALLA · NOMBRE DEL MESERO
+       ================================================================ -->
+  <div class="pantalla-exito" id="pantalla-nombre">
+    <div class="ventana exito-ventana">
+      <div class="barra-titulo">
+        <span class="icono-titulo">▣</span>
+        <span class="titulo-ventana">BIENVENIDO AL TURNO</span>
+        <span class="botones-titulo" aria-hidden="true">
+          <span class="boton-titulo">_</span><span class="boton-titulo">□</span><span class="boton-titulo">×</span>
+        </span>
+      </div>
+      <div class="contenido-ventana">
+        <div class="logo-login">CAJA<b>FUTURISTA</b></div>
+        <p class="subtitulo-login">PEDIDOS DE LOS CLIENTES POR WIFI</p>
+
+        <h1 class="exito-titulo">¿QUIÉN ATIENDE LOS PEDIDOS?</h1>
+        <p class="confirmar-mensaje">
+          Escribe tu nombre y el código de acceso para ver y atender los pedidos.
+        </p>
+
+        <label class="etiqueta-campo" for="campo-mesero">TU NOMBRE</label>
+        <input class="campo" id="campo-mesero" type="text" maxlength="40"
+               placeholder="Ej. Andrés" autocomplete="off" autocapitalize="words">
+
+        <label class="etiqueta-campo" for="campo-pin-mesero">CÓDIGO DE ACCESO</label>
+        <input class="campo" id="campo-pin-mesero" type="password" maxlength="100"
+               placeholder="PIN de meseros" autocomplete="current-password">
+
+        <p class="mensaje-error oculto" id="error-nombre" role="alert"></p>
+
+        <div class="fila-botones">
+          <button type="button" class="boton boton-primario boton-grande" id="btn-entrar-mesero">
+            EMPEZAR
+          </button>
+        </div>
+
+        <p class="pie-ventana">
+          CAJA FUTURISTA · CONECTADO A LA CAJA POR WIFI
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL · RECHAZAR PEDIDO
+       ================================================================ -->
+  <div class="modal-fondo oculto" id="modal-rechazo">
+    <div class="ventana modal" role="dialog" aria-modal="true" aria-labelledby="titulo-rechazo">
+      <div class="barra-titulo">
+        <span class="icono-titulo">!</span>
+        <span class="titulo-ventana" id="titulo-rechazo">RECHAZAR PEDIDO</span>
+        <span class="botones-titulo">
+          <button type="button" class="boton-titulo" data-cerrar="modal-rechazo" aria-label="Cerrar">×</button>
+        </span>
+      </div>
+
+      <div class="contenido-ventana">
+        <p class="confirmar-mensaje" id="rechazo-resumen"></p>
+        <label class="etiqueta-campo" for="motivo-rechazo">MOTIVO (EL CLIENTE LO VERÁ)</label>
+        <textarea class="campo" id="motivo-rechazo" maxlength="200" rows="3"
+                  placeholder="Ej. Se acabó el ingrediente, cocina cerrada…"></textarea>
+        <p class="mensaje-error oculto" id="error-rechazo" role="alert"></p>
+      </div>
+
+      <div class="modal-pie">
+        <button type="button" class="boton" data-cerrar="modal-rechazo">VOLVER</button>
+        <button type="button" class="boton boton-peligro" id="btn-confirmar-rechazo">RECHAZAR PEDIDO</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/comun.js"></script>
+  <script src="/mesero.js"></script>
+</body>
+</html>

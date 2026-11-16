@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#0891b2">
+  <title>Carta del día · Caja Futurista</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css">
+</head>
+<body class="cuerpo-cliente" data-theme="futurista">
+
+  <header class="cab-cliente">
+    <h1 id="negocio-cliente">CAJA FUTURISTA</h1>
+    <p id="eslogan-cliente">CARTA DEL DÍA · PIDE DESDE TU CELULAR</p>
+  </header>
+
+  <!-- ================================================================
+       VISTA · CARTA
+       ================================================================ -->
+  <main id="vista-carta">
+    <p class="carta-nota" id="nota-cliente">Toca los platos que quieras y pulsa PEDIR.</p>
+    <div class="categorias-cliente" id="categorias-cliente"></div>
+    <div class="lista-platos" id="lista-platos"></div>
+  </main>
+
+  <!-- ================================================================
+       VISTA · ESTADO DEL PEDIDO
+       ================================================================ -->
+  <main id="vista-estado" class="oculto">
+    <div class="estado-pedido">
+      <div class="estado-icono" id="estado-icono">⏳</div>
+      <div class="estado-titulo" id="estado-titulo">ESPERANDO AL MESERO…</div>
+      <div class="estado-detalle" id="estado-detalle"></div>
+      <div class="recibo-resumen" id="estado-recibo"></div>
+      <div class="fila-botones">
+        <button type="button" class="boton" id="btn-otro-pedido">VER LA CARTA OTRA VEZ</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================================================================
+       BARRA INFERIOR · CARRITO
+       ================================================================ -->
+  <footer class="barra-cliente oculto" id="barra-cliente">
+    <div class="carrito-resumen">
+      <span>TU PEDIDO</span>
+      <b id="total-cliente">$0.00</b>
+      <span id="articulos-cliente">0 artículos</span>
+    </div>
+    <button type="button" class="boton boton-primario" id="btn-pedir">PEDIR</button>
+  </footer>
+
+  <!-- ================================================================
+       MODAL · CONFIRMAR PEDIDO
+       ================================================================ -->
+  <div class="modal-fondo oculto" id="modal-pedido-cliente">
+    <div class="ventana modal" role="dialog" aria-modal="true" aria-labelledby="titulo-pedido-cliente">
+      <div class="barra-titulo">
+        <span class="icono-titulo">▤</span>
+        <span class="titulo-ventana" id="titulo-pedido-cliente">CONFIRMAR TU PEDIDO</span>
+        <span class="botones-titulo">
+          <button type="button" class="boton-titulo" data-cerrar="modal-pedido-cliente" aria-label="Cerrar">×</button>
+        </span>
+      </div>
+
+      <div class="contenido-ventana">
+        <div class="carrito-lineas" id="carrito-cliente"></div>
+
+        <label class="etiqueta-campo" for="campo-mesa-cliente">NÚMERO DE MESA</label>
+        <input class="campo" id="campo-mesa-cliente" type="number" min="1" max="99"
+               inputmode="numeric" placeholder="Ej. 7" autocomplete="off">
+
+        <label class="etiqueta-campo" for="nota-pedido-cliente">NOTA PARA LA COCINA (OPCIONAL)</label>
+        <textarea class="nota-general" id="nota-pedido-cliente" maxlength="300" rows="2"
+                  placeholder="Sin cebolla, término medio, servir juntos…"></textarea>
+
+        <div class="carrito-total">
+          <span>TOTAL DEL PEDIDO</span>
+          <b id="total-modal-cliente">$0.00</b>
+        </div>
+
+        <p class="confirmar-mensaje" id="aviso-cliente-pedido"></p>
+        <p class="mensaje-error oculto" id="error-cliente" role="alert"></p>
+      </div>
+
+      <div class="modal-pie">
+        <button type="button" class="boton" data-cerrar="modal-pedido-cliente">SEGUIR ELIGIENDO</button>
+        <button type="button" class="boton boton-primario boton-grande" id="btn-enviar-cliente">
+          ENVIAR PEDIDO
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/comun.js"></script>
+  <script src="/cliente.js"></script>
+</body>
+</html>

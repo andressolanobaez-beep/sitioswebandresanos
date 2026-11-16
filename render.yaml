@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: sitioswebandresanos
+    runtime: python
+    plan: free
+    buildCommand: python -m py_compile render_relay.py
+    startCommand: python render_relay.py
+    envVars:
+      - key: PUBLIC_URL
+        value: https://sitioswebandresanos.onrender.com
+      - key: RELAY_POS_TOKEN
+        generateValue: true
+      - key: RELAY_WAITER_PIN
+        sync: false
